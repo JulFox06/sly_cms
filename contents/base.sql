@@ -46,8 +46,9 @@ CREATE TABLE sly_config(
         cnfid       int (11) Auto_increment  NOT NULL ,
         titre       Varchar (50) ,
         admin_email Varchar (50) ,
+        tel_email Varchar (12) ,
         theme       Varchar (50) ,
-        description Varchar (50) ,
+        description Text ,
         PRIMARY KEY (cnfid )
 )ENGINE=InnoDB;
 
@@ -58,10 +59,8 @@ CREATE TABLE sly_config(
 
 CREATE TABLE sly_comment(
         fid        int (11) Auto_increment  NOT NULL ,
-        titre      Varchar (50) ,
         auteur     Varchar (50) ,
         date_post  Datetime ,
-        date_modif Datetime ,
         contenu    Text ,
         aid        Int ,
         PRIMARY KEY (fid )
@@ -86,8 +85,8 @@ CREATE TABLE sly_categorie(
 
 CREATE TABLE sly_message(
         mid          int (11) Auto_increment  NOT NULL ,
-        auteur       Varchar (50) ,
-        destinataire Varchar (50) ,
+        auteur       int (11) ,
+        destinataire int (11) ,
         contenu      Text ,
         date_post    Datetime ,
         PRIMARY KEY (mid )

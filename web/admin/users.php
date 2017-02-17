@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['login'] == "") {
-	header('Location:../login.php');
+if ($_SESSION['login'] == "" | $_SESSION['groupe'] == "Visiteur" | $_SESSION['groupe'] == "Rédacteur") {
+	header('Location:../');
 }
 include '../../contents/sly_config.php';
 $req = 'SELECT * FROM sly_config';
@@ -16,7 +16,7 @@ $array_config = mysqli_fetch_array($res);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="assets/fox-logo.png">
+	<link rel="shortcut icon" href="../assets/fox-logo.png">
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,6 +27,42 @@ $array_config = mysqli_fetch_array($res);
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+	<script>
+	$(document).ready(function(){
+		$(document).on("click","#alert-succes", function(){
+			$(".bg-success").remove();
+		});
+		$(document).on("click","#alert-fail", function(){
+			$(".bg-danger").remove();
+		});
+
+		$("#delete").on("click", function(){
+		  $(".selected").each(function(){
+		  	var row = $(this);
+		    var id = parseInt($(this).find("td:nth-child(2)").html());
+		    console.log(id);
+		    var par = {id: id};
+
+		    $.ajax({
+		      url: "delete/delete_user.php",
+		      method: "POST",
+		      data: par,
+		      success: function(){
+		        $('.page-header').after('<div class="alert bg-success" role="alert"><i class="fa fa-check"></i> Utilisateur(s) supprimé(s) avec succés ! <a href="#" id="alert-succes" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+		        row.remove();
+		      },
+		      error: function(){
+		      	$('.page-header').after('<div class="alert bg-danger" role="alert"><i class="fa fa-exclamation"></i> Une erreur s\'est produite ! <a href="#" id="alert-fail" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+		      }
+
+		    });
+
+		  });
+
+		});
+	});
+	</script>
+
 	<link href="css/datepicker3.css" rel="stylesheet">
 	<link href="css/bootstrap-table.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
@@ -34,18 +70,10 @@ $array_config = mysqli_fetch_array($res);
 </head>
 
 <body>
-	<?php include 'inc/menu.php';?>
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<ul class="nav menu">
-			<li role="presentation" class="divider"></li>
-			<li><a href="index.php"><i class="fa fa-laptop"></i> Dashboard</a></li>
-			<li class="active"><a href="users.php"><i class="fa fa-users"></i> Utilisateurs</a></li>
-			<li><a href="articles.php"><i class="fa fa-folder-open"></i> Articles</a></li>
-			<li><a href="categorie.php"><i class="fa fa-list"></i> Catégories</a></li>
-			<li><a href="messagerie.php"><i class="fa fa-comments"></i> Messagerie</a></li>
-			<li role="presentation" class="divider"></li>
-		</ul>
-	</div><!--/.sidebar-->
+	<?php
+	include 'inc/menu.php';
+	include 'inc/menu_v.php';
+	?>
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		
@@ -58,16 +86,30 @@ $array_config = mysqli_fetch_array($res);
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<table data-toggle="table" data-url="tables/data1.json"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-						    <thead>
-						    <tr>
-						        <th data-field="state" data-checkbox="true" >Item ID</th>
-						        <th data-field="id" data-sortable="true">Item ID</th>
-						        <th data-field="name"  data-sortable="true">Item Name</th>
-						        <th data-field="price" data-sortable="true">Item Price</th>
-						    </tr>
-						    </thead>
+						<table data-toggle="table" data-url="tables/users.php"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+					    <thead>
+					    <tr>
+				    		<?php
+									if ($_SESSION['groupe'] == "Administrateur") {
+										echo '<th data-field="state" data-checkbox="true" >Item ID</th>';
+									}
+								?>
+				        <th data-field="uid" data-sortable="true">ID User</th>
+				        <th data-field="login"  data-sortable="true">Login</th>
+				        <th data-field="nom" data-sortable="true">Nom</th>
+				        <th data-field="prenom" data-sortable="true">Prénom</th>
+				        <th data-field="mail" data-sortable="true">Mail</th>
+				        <th data-field="groupe" data-sortable="true">Groupe</th>
+					    </tr>
+					    </thead>
 						</table>
+						<?php
+							if ($_SESSION['groupe'] == "Administrateur") {
+								echo '<span class="pull-right">
+								<button id="delete" class="btn btn-sm btn-danger">Supprimer</button>
+							</span>';
+							}
+						?>
 					</div>
 				</div>
 			</div>

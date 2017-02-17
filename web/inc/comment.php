@@ -60,7 +60,7 @@ if ($_SESSION['login'] != "") {
 		$message = trim(htmlentities(mysqli_real_escape_string($lien,$_POST['contenu'])));
 		$login = $_SESSION['login'];
 		$aid = $_GET['comment'];
-		$req_s = "INSERT INTO sly_comment VALUES (NULL,'$login','".date('Y-m-d H:i:s')."',NULL,'$message','$aid')";
+		$req_s = "INSERT INTO sly_comment VALUES (NULL,'$login','".date('Y-m-d H:i:s')."','$message','$aid')";
 		$res_s = mysqli_query($lien,$req_s);
 		if (!$res_s) {
 			echo "Erreur SQL : $req_s <br>".mysqli_error($lien);

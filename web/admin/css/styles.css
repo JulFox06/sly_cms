@@ -100,7 +100,7 @@ h3, h4 {
 
 /*Buttons*/
 
-a.btn:hover,
+/*a.btn:hover,
 button:hover {
 	opacity: 0.8;
 }
@@ -235,7 +235,7 @@ fieldset[disabled] .btn-danger:active,
 fieldset[disabled] .btn-danger.active {
 	background-color: #f9243f;
 	border-color: #f9243f;
-}
+}*/
 
 /*Backgrounds*/
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_destroy();
 include '../contents/sly_config.php';
 $req = 'SELECT * FROM sly_config';
 $res = mysqli_query($lien,$req);
@@ -7,24 +8,7 @@ $array_config = mysqli_fetch_array($res);
 ?>
 <!DOCTYPE html>
 <head>
-	<title><?php echo $array_config['titre'];?> | Connexion</title>
-
-	<!-- Meta -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="shortcut icon" href="assets/fox-logo.png">
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!-- Latest compiled and minified JavaScript -->
-  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="assets/css/style1.css">
+	<?php include 'inc/head.php';?>
 
 </head>
 

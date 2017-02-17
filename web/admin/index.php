@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['login'] == "") {
+if ($_SESSION['login'] == "" | $_SESSION['groupe'] == "Visiteur") {
 	header('Location:../login.php');
 }
 include '../../contents/sly_config.php';
@@ -16,7 +16,7 @@ $array_config = mysqli_fetch_array($res);
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="assets/fox-logo.png">
+	<link rel="shortcut icon" href="../assets/fox-logo.png">
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,18 +33,11 @@ $array_config = mysqli_fetch_array($res);
 </head>
 
 <body>
-	<?php include 'inc/menu.php';?>
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<ul class="nav menu">
-			<li role="presentation" class="divider"></li>
-			<li class="active"><a href="index.php"><i class="fa fa-laptop"></i> Dashboard</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Utilisateurs</a></li>
-			<li><a href="articles.php"><i class="fa fa-folder-open"></i> Articles</a></li>
-			<li><a href="categorie.php"><i class="fa fa-list"></i> Catégories</a></li>
-			<li><a href="messagerie.php"><i class="fa fa-comments"></i> Messagerie</a></li>
-			<li role="presentation" class="divider"></li>
-		</ul>
-	</div><!--/.sidebar-->
+	<?php
+	include 'inc/menu.php';
+	$active = 'index';
+	include 'inc/menu_v.php';
+	?>
 		
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		

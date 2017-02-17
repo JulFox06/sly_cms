@@ -25,7 +25,7 @@
           }
           else {
               echo '<li class="dropdown">';
-              echo '<a class="drodown-toggle" data-toggle="dropdown">'.$menu['name'].' <span class="caret"></span></a>';
+              echo '<a class="dropdown-toggle" data-toggle="dropdown">'.$menu['name'].' <span class="caret"></span></a>';
               echo '<ul class="dropdown-menu">';
               echo "<li><a href='../web?cats=".$menu['cid']."'><b>".$menu['name']."</b></a></li>";
               do{
@@ -46,7 +46,7 @@
         echo '<li class="dropdown">';
         echo '<a class="drodown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <span class="caret"></span></a>';
         echo "<ul class='dropdown-menu'>";
-        echo "<li><a href='register.php'><span class='glyphicon glyphicon-user'></span> S'inscrire</a></li>
+        echo "<li><a href='register.php'><span class='glyphicon glyphicon-check'></span> S'inscrire</a></li>
         <li><a href='login.php'><span class='glyphicon glyphicon-log-in'></span> Connexion</a></li>";
         echo "</ul></li>";
       }
@@ -56,6 +56,9 @@
         echo "<ul class='dropdown-menu'>";
         if (($_SESSION['groupe'] == 'Administrateur') || ($_SESSION['groupe'] == 'Modérateur')) {
           echo "<li><a href='admin/' style='color:red;'><span class='glyphicon glyphicon-cog'></span> Administration</a></li>";
+        }
+        if ($_SESSION['groupe'] == 'Rédacteur') {
+          echo "<li><a href='admin/' style='color:red;'><i class='fa fa-envelope-open'></i> Messagerie</a></li>";
         }
         echo "<li><a href='profil.php'><span class='glyphicon glyphicon-user'></span> ".$_SESSION['login']."</a></li>
         <li><a href='logout.php'><span class='glyphicon glyphicon-log-out'></span> Déconnexion</a></li>";

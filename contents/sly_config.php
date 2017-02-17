@@ -2,7 +2,7 @@
   $hote   = "localhost";
   $login  = "root";
   $mdp    = "iris";
-  $base   = "cms_bdd";
+  $base   = "sly_cms";
 
   $prefix = "sly_";
 

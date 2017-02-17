@@ -142,7 +142,7 @@ else {
 		$array_count = mysqli_fetch_array($res);
 
 		if (($array_count = $array_count[0]) == 0) {
-			echo "<br><div class='alert alert-danger'><strong>Attention !</strong> Aucun article trouvé dans la catégorie principale.</div>";
+			echo "<br><div class='alert alert-danger'><strong>Attention !</strong> Aucun article trouvé dans la/les sous catégorie(s).</div>";
 		}
 		else {
 			$req_c = "SELECT * FROM appartient WHERE cid=".$array_cid['cid'];

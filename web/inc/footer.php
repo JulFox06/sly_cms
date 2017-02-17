@@ -4,8 +4,7 @@
       <div class="col-md-4 col-sm-6 footerleft ">
         <div class="logofooter"> <?php echo $array_config['titre'];?></div>
         <p><?php echo $array_config['description'];?></p>
-        <p><i class="fa fa-map-pin"></i> </p>
-        <p><i class="fa fa-phone"></i> Téléphone : </p>
+        <p><i class="fa fa-phone"></i> Téléphone : <?php echo $array_config['tel_admin'];?></p>
         <p><i class="fa fa-envelope"></i> E-mail : <?php echo $array_config['admin_email'];?></p>
         
       </div>

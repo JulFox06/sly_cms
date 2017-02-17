@@ -7,13 +7,13 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><span><?php echo $array_config['titre'];?></span>Admin</a>
+			<a class="navbar-brand" href="../admin"><span><?php echo $array_config['titre'];?></span>Admin</a>
 			<ul class="user-menu">
 				<li class="dropdown pull-right">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $_SESSION['login'];?> <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
+						<li><a href="../">Retour site</a></li>
 						<li><a href="../profil.php"> Profil</a></li>
-						<li><a href="#"> Paramétres</a></li>
 						<li><a href="../logout.php"> Déconnexion</a></li>
 					</ul>
 				</li>

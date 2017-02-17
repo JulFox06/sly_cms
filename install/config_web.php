@@ -41,6 +41,7 @@
       form.append("<label for='nom_admin'>Nom  :</label><input type='text' name='nom_admin' required><br>");
       form.append("<label for='prenom_admin'>Prénom :</label><input type='text' name='prenom_admin' required><br>");
       form.append("<label for='mail_admin'>Adresse mail :</label><input type='mail' name='mail_admin' required><br>");
+      form.append("<label for='tel_admin'>Téléphone :</label><input type='phone' name='tel_admin' required><br>");
       form.append("<label for='login_admin'>Login :</label><input type='text' name='login_admin' required><br>");
       form.append("<label for='mdp_admin'>Mot de passe :</label><input type='password' name='mdp_admin' required><br>");
       form.append("<label for='mdp_admin2'>Recopier le mot de passe :</label><input type='password' name='mdp_admin2' required><br>");
@@ -80,12 +81,13 @@ if (isset($_POST['valider'])) {
     $prenom = trim(htmlentities(mysqli_real_escape_string($lien, $_POST['prenom_admin'])));
     $sexe = $_POST['sexe'];
     $mail_admin = trim($_POST['mail_admin']);
+    $tel_admin = trim($_POST['tel_admin']);
     $login_admin = trim(htmlentities(mysqli_real_escape_string($lien, $_POST['login_admin'])));
     $mdp_admin = md5($_POST['mdp_admin']);
     $theme = $_POST['theme'];
     $description = trim(htmlentities(mysqli_real_escape_string($lien, $_POST['description'])));
 
-    $req = "INSERT INTO sly_config VALUES(NULL,'$title','$mail_admin','$theme','$description')";
+    $req = "INSERT INTO sly_config VALUES(NULL,'$title','$mail_admin','$tel_admin','$theme','$description')";
     $res = mysqli_query($lien,$req);
     if (!$res) {
       echo "Erreur SQL : $req <br>".mysqli_error($lien);
