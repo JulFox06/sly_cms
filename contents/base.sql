@@ -47,7 +47,7 @@ CREATE TABLE sly_config(
         titre       Varchar (50) ,
         admin_email Varchar (50) ,
         tel_email Varchar (12) ,
-        theme       Varchar (50) ,
+        theme       int (11) ,
         description Text ,
         PRIMARY KEY (cnfid )
 )ENGINE=InnoDB;
@@ -76,6 +76,19 @@ CREATE TABLE sly_categorie(
         name  Varchar (50) ,
         cid_1 Int ,
         PRIMARY KEY (cid )
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: sly_rank
+#------------------------------------------------------------
+
+CREATE TABLE sly_rank(
+        rid     int (11) Auto_increment  NOT NULL ,
+        login   Varchar (50) ,
+        rank    Varchar (25) ,
+        message Text ,
+        PRIMARY KEY (rid )
 )ENGINE=InnoDB;
 
 

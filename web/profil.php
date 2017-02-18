@@ -141,7 +141,9 @@ include 'inc/menu.php';
 
 											$req = "SELECT * FROM sly_categorie WHERE cid=".$array_cat_s_name['cid_1'];
 											$res5 = mysqli_query($lien,$req);
-											$array_cat_name = mysqli_fetch_array($res5);
+											if ($res5) {
+												$array_cat_name = mysqli_fetch_array($res5);
+											}
 
 	                		echo "<tr>";
 	                		if ($array_cat_s_name['cid_1'] == NULL) {
@@ -240,7 +242,7 @@ include 'inc/menu.php';
           </div>
         </div>
         <div class="panel-footer">
-          <a class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+          <a class="btn btn-sm btn-primary"><i class="fa fa-drivers-license-o"></i> Demande de droit</a>
           <span class="pull-right">
 	          <a href="edituser.php" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
 	          <a href="deluser.php" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
@@ -276,7 +278,9 @@ include 'inc/menu.php';
 
 										$req = "SELECT * FROM sly_categorie WHERE cid=".$array_cat_s_name['cid_1'];
 										$res5 = mysqli_query($lien,$req);
-										$array_cat_name = mysqli_fetch_array($res5);
+										if ($res5) {
+											$array_cat_name = mysqli_fetch_array($res5);
+										}
 
                 		echo "<tr>";
                 		if ($array_cat_s_name['cid_1'] == NULL) {

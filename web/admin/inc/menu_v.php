@@ -29,7 +29,9 @@
 			<?php
 			if ($_SESSION['groupe'] == 'Administrateur') {
 				?>
+				<li role="presentation" class="divider"></li>
 				<li<?php active('config.php'); ?>><a href="config.php"><i class="fa fa-cogs"></i> Configuration</a></li>
+				<li<?php active('droit.php'); ?>><a href="droit.php"><i class="fa fa-drivers-license-o"></i> Gestion des droits</a></li>
 				<?php
 			}
 		}

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-<!--<nav class="navbar navbar-inverse navbar-fixed-top">-->
+<!--<nav class="navbar navbar-default navbar-fixed-top">-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -42,7 +42,7 @@
       <ul class="nav navbar-nav navbar-right">
       <li><a href="team.php">L'équipe</a></li>
       <?php
-      if ($_SESSION['login'] == "") {
+      if (!isset($_SESSION['login'])) {
         echo '<li class="dropdown">';
         echo '<a class="drodown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <span class="caret"></span></a>';
         echo "<ul class='dropdown-menu'>";

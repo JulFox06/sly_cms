@@ -19,7 +19,7 @@ include 'inc/menu.php';
 <div class="container">
   <div class="row content">
   	<?php 
-  	if (($_SESSION['login'] != "") && (!isset($_GET['comment']))) {
+  	if ((isset($_SESSION['login'])) && (!isset($_GET['comment']))) {
   		echo "<div class='bg_white text-center col-sm-8 col-sm-offset-2' style='margin-bottom:20px;'>";
   		echo "<h1>Bonjour <i>".$_SESSION['nom']." ".$_SESSION['prenom']."</i>.<br>";
   		if ($_SESSION['groupe'] != "Visiteur") {
@@ -44,8 +44,6 @@ include 'inc/menu.php';
 
 		$parpage = 3;
 		$premier = $parpage*($page-1);
-
-    $login = $_SESSION['login'];
 
     if (isset($_GET['comment'])) {
     	include 'inc/comment.php';

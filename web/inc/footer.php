@@ -21,6 +21,7 @@
         <h6 class="heading7">DERNIERS COMMENTAIRES</h6>
         <div class="post">
         <?php
+        $mois_fr = Array("", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
         $req = "SELECT * FROM sly_comment ORDER BY fid DESC LIMIT 0,3";
         $res_f = mysqli_query($lien,$req);
         while ($last_post = mysqli_fetch_array($res_f)) {

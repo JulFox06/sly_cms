@@ -19,7 +19,9 @@ if (isset($_GET['comment'])) {
 
 		$req = "SELECT * FROM sly_categorie WHERE cid=".$array_cat_s_name['cid_1'];
 		$res5 = mysqli_query($lien,$req);
-		$array_cat_name = mysqli_fetch_array($res5);
+		if ($res5) {
+			$array_cat_name = mysqli_fetch_array($res5);
+		}
 
 		list($date_complete, $heure) = explode(' ', $array_art['date_public']);
     list($annee, $mois, $jour) = explode('-', $date_complete);
@@ -27,7 +29,7 @@ if (isset($_GET['comment'])) {
     $date_actus = $jour. ' '.$mois_fr[$mois].' '.$annee.' à '.$heure;
 		echo "<h2>".$array_art['titre']."</h2>";
 		echo "<div class='text-right'>";
-		if (($_SESSION['groupe'] == 'Administrateur') || ($_SESSION['groupe'] == 'Modérateur') || ($_SESSION['login'] == $array_art['auteur'])) {
+		if (isset($_SESSION['login']) && (($_SESSION['groupe'] == 'Administrateur') || ($_SESSION['groupe'] == 'Modérateur') || ($_SESSION['login'] == $array_art['auteur']))) {
 			echo "<a href='modify.php?id=".$array_art['aid']."' class='btn btn-warning'><span class='glyphicon glyphicon-edit'></span></a> ";
 			echo "<a href='delart.php?id=".$array_art['aid']."' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span></a>";
 		}
@@ -46,7 +48,7 @@ if (isset($_GET['comment'])) {
 	}
 }
 
-if ($_SESSION['login'] != "") {
+if (isset($_SESSION['login'])) {
 	?>
 	<h4>Laissez un commentaire :</h4>
   <form method="post" action="index.php?comment=<?php echo $_GET['comment'];?>" role="form">

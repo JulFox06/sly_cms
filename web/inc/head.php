@@ -21,5 +21,27 @@
 <script type="text/javascript" src="assets/js/locales/bootstrap-datepicker.fr.js"></script>
 
 <link rel="stylesheet" type="text/css" href="assets/css/trumbowyg.min.css">
-<link rel="stylesheet" type="text/css" href="assets/css/style1.css">
-<!--<link rel="stylesheet" type="text/css" href="assets/css/journal.min.css">-->
+<link rel="stylesheet" type="text/css" href="assets/css/footer.css">
+<?php
+switch ($array_config['theme']) {
+	case '1':
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/style1.css">';
+		break;
+	
+	case '2':
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/journal.min.css">';
+		break;
+	
+	case '3':
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/yeti.min.css">';
+		break;
+	
+	case '4':
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/simplex.min.css">';
+		break;
+	
+	default:
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/style1.css">';
+		break;
+}
+?>
