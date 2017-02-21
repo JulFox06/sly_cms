@@ -31,6 +31,83 @@ $array_config = mysqli_fetch_array($res);
 	<link href="css/bootstrap-table.css" rel="stylesheet">
 	<link href="css/styles.css" rel="stylesheet">
 
+	<script>
+	$(document).ready(function(){
+		$(document).on("click","#alert-succes", function(){
+			$(".bg-success").remove();
+		});
+		$(document).on("click","#alert-fail", function(){
+			$(".bg-danger").remove();
+		});
+
+		$("#delete").on("click", function(){
+		  $(".selected").each(function(){
+		  	var row = $(this);
+		    var id = parseInt($(this).find("td:nth-child(2)").html());
+		    console.log(id);
+		    var par = {id: id};
+
+		    $.ajax({
+		      url: "delete/delete_droit.php",
+		      method: "POST",
+		      data: par,
+		      success: function(){
+		        $('.page-header').after('<div class="alert bg-success" role="alert"><i class="fa fa-check"></i> Utilisateur(s) dé-gradé(s) avec succés ! <a href="#" id="alert-succes" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+		        row.remove();
+		      },
+		      error: function(){
+		      	$('.page-header').after('<div class="alert bg-danger" role="alert"><i class="fa fa-exclamation"></i> Une erreur s\'est produite ! <a href="#" id="alert-fail" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+		      }
+
+		    });
+
+		  });
+
+		});
+
+		$(".yes").on("click", function(){
+			var row = $(this);
+	    var id = this.id;
+	    console.log(id);
+	    var par = {id: id};
+
+	    $.ajax({
+	      url: "droits/yes.php",
+	      method: "POST",
+	      data: par,
+	      success: function(){
+	        $('.page-header').after('<div class="alert bg-success" role="alert"><i class="fa fa-check"></i> Utilisateur gradé avec succés ! <a href="#" id="alert-succes" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+	        row.remove();
+	      },
+	      error: function(){
+	      	$('.page-header').after('<div class="alert bg-danger" role="alert"><i class="fa fa-exclamation"></i> Une erreur s\'est produite ! <a href="#" id="alert-fail" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+	      }
+
+	    });
+		});
+
+		$(".no").on("click", function(){
+			var row = $(this);
+	    var id = this.id;
+	    console.log(id);
+	    var par = {id: id};
+
+	    $.ajax({
+	      url: "droits/no.php",
+	      method: "POST",
+	      data: par,
+	      success: function(){
+	        $('.page-header').after('<div class="alert bg-success" role="alert"><i class="fa fa-check"></i> Demande de droit refusée avec succés ! <a href="#" id="alert-succes" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+	        row.remove();
+	      },
+	      error: function(){
+	      	$('.page-header').after('<div class="alert bg-danger" role="alert"><i class="fa fa-exclamation"></i> Une erreur s\'est produite ! <a href="#" id="alert-fail" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a></div>');
+	      }
+
+	    });
+		});
+	});
+	</script>
 </head>
 
 <body>
@@ -54,18 +131,23 @@ $array_config = mysqli_fetch_array($res);
 						<table data-toggle="table" data-url="tables/droits.php" data-show-refresh="true" data-pagination="true" data-sort-name="groupe" data-sort-order="asc">
 					    <thead>
 					    <tr>
+					    	<th data-field="state" data-checkbox="true" >Item ID</th>
 				        <th data-field="uid" data-sortable="true">ID User</th>
 				        <th data-field="login"  data-sortable="true">Login</th>
 				        <th data-field="groupe" data-sortable="true">Groupe</th>
 					    </tr>
 					    </thead>
 						</table>
+						<span class="pull-right">
+							<button id="delete" class="btn btn-sm btn-danger">Dé-grader</button>
+						</span>
 					</div>
 				</div>
 			</div>
 			<div class="col-lg-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
+						<h4>Demande de droits :</h4>
 					<?php
 					$req = "SELECT * FROM sly_rank";
 					$res = mysqli_query($lien, $req);
@@ -79,8 +161,8 @@ $array_config = mysqli_fetch_array($res);
 							echo '<button data-toggle="collapse" data-target="#'.$rank['login'].'_btn">'.$rank['login'].'</button> souhaite devenir '.$rank['rank'].'.';
 							echo '</div>';
 							echo '<div class="col-md-3">';
-							echo '<button class="btn btn-sm btn-success"><i class="fa fa-check"></i></button>';
-							echo '<button class="btn btn-sm btn-danger"><i class="fa fa-close"></i></button>';
+							echo '<button class="btn btn-sm btn-success yes" id="'.$rank['login'].'_y"><i class="fa fa-check"></i></button>';
+							echo '<button class="btn btn-sm btn-danger no" id="'.$rank['login'].'_n"><i class="fa fa-close"></i></button>';
 							echo '</div>';
 							echo '<div id="'.$rank['login'].'_btn" class="collapse"><p>'.$rank['message'].'</p></div><br>';
 							echo '</div>';

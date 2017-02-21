@@ -89,14 +89,14 @@ if (isset($_SESSION['login'])) {
   		//Affichage des avatars
   		$req = "SELECT * FROM sly_user WHERE login='".$array_comment['auteur']."'";
   		$res2 = mysqli_query($lien,$req);
-	  	do{
+	  	while ($array_team = mysqli_fetch_array($res2)){
 	  		if ($array_team['sexe'] == 'F') {
 	  			echo '<img src="profil_img/woman.png" class="img-circle" height="65" width="65" alt="Avatar">';
 	  		}
 	  		else if ($array_team['sexe'] == 'H') {
 	      	echo '<img src="profil_img/boss.png" class="img-circle" height="65" width="65" alt="Avatar">';
 	      }
-    	}while ($array_team = mysqli_fetch_array($res2));
+    	}
 
     	echo '</div>';
 	    echo '<div class="col-sm-10">';

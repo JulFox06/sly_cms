@@ -167,9 +167,14 @@ include 'inc/menu.php';
     }
     else {
     	$mois_fr = Array("", "janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre");
-			list($annee, $mois, $jour) = explode('-', $_SESSION['born']);
-			$mois = str_replace('0','',$mois);
-			$born = $jour. ' '.$mois_fr[$mois].' '.$annee;
+    	if ($_SESSION['born'] != NULL) {
+    		list($annee, $mois, $jour) = explode('-', $_SESSION['born']);
+				$mois = str_replace('0','',$mois);
+				$born = $jour. ' '.$mois_fr[$mois].' '.$annee;
+    	}
+    	else {
+    		$born = "";
+    	}
 
 			list($annee2, $mois2, $jour2) = explode('-', $_SESSION['register']);
 			$mois2 = str_replace('0','',$mois2);
@@ -241,8 +246,77 @@ include 'inc/menu.php';
             </div>
           </div>
         </div>
+        	<?php
+        	if (isset($_POST['envoi'])) {
+        		$login = $_SESSION['login'];
+        		$rang = $_POST['rang'];
+        		$motivation = trim(htmlentities(mysqli_real_escape_string($lien, $_POST['motivation'])));
+
+        		$req = "SELECT count(*) AS nblogin FROM sly_rank WHERE login='$login'";
+			      $res = mysqli_query($lien,$req);
+			      if(!$res){
+			        echo "Erreur SQL : $req <br>".mysqli_error($lien);
+			      }
+			      else{
+			        $tab = mysqli_fetch_array($res);
+			        if ($tab['nblogin']==0) {
+
+			          //Requête d'insertion dans la base de données
+			          $req = "INSERT INTO sly_rank VALUES(NULL,'$login','$rang','$motivation')";
+			          $res = mysqli_query($lien,$req);
+			          if (!$res) {
+			            echo "Erreur SQL : $req <br>".mysqli_error($lien);
+			          }
+			          else{
+			            echo "Demande de droit effectuée";
+			          }
+			        }
+			        else{
+			          echo "Vous avez déjà réalisé une demande de droit, merci de patienter.";
+			        }
+			      }
+        	}
+        	?>
         <div class="panel-footer">
-          <a class="btn btn-sm btn-primary"><i class="fa fa-drivers-license-o"></i> Demande de droit</a>
+        	<?php
+        	$req = "SELECT * FROM sly_rank WHERE login='".$_SESSION['login']."'";
+        	$res = mysqli_query($lien, $req);
+        	if ($res) {
+        		$rank = mysqli_fetch_array($res);
+        		if ($rank[0] != NULL) {
+        			echo '<button class="btn btn-sm btn-primary" disabled><i class="fa fa-drivers-license-o"></i> Demande de droit</button>';
+	        	}
+	        	else {
+	        		echo '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-drivers-license-o"></i> Demande de droit</button>';
+	        	}
+        	}
+        	?>
+        	<div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Demande de droit</h4>
+				        </div>
+				        <div class="modal-body">
+				          <p>Vous souhaitez devenir Rédacteur ou Modérateur sur ce site ? Faites votre demande ici !</p>
+				          <form method="POST" action="profil.php" class="form-signin">
+				          	<select name="rang" class="form-control">
+				          		<option>Rédacteur</option>
+				          		<option>Modérateur</option>
+				          	</select>
+				          	<textarea name="motivation" class="form-control" placeholder="Vos motivations ..."></textarea>
+				          	<input type="submit" class="btn btn-primary" name="envoi" value="Envoyer">
+				          </form>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
           <span class="pull-right">
 	          <a href="edituser.php" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
 	          <a href="deluser.php" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
