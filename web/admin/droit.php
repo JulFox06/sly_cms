@@ -161,7 +161,7 @@ $array_config = mysqli_fetch_array($res);
 							echo '<button data-toggle="collapse" data-target="#'.$rank['login'].'_btn">'.$rank['login'].'</button> souhaite devenir '.$rank['rank'].'.';
 							echo '</div>';
 							echo '<div class="col-md-3">';
-							echo '<button class="btn btn-sm btn-success yes" id="'.$rank['login'].'_y"><i class="fa fa-check"></i></button>';
+							echo '<button class="btn btn-sm btn-success yes" id="'.$rank['login'].'_y_'.$rank['rank'].'"><i class="fa fa-check"></i></button>';
 							echo '<button class="btn btn-sm btn-danger no" id="'.$rank['login'].'_n"><i class="fa fa-close"></i></button>';
 							echo '</div>';
 							echo '<div id="'.$rank['login'].'_btn" class="collapse"><p>'.$rank['message'].'</p></div><br>';

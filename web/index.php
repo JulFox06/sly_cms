@@ -57,8 +57,8 @@ include 'inc/menu.php';
 		}
 		
     ?>
+    </div>
   </div>
-</div>
 </div>
 <br><br>
 <?php

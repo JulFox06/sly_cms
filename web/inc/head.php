@@ -40,6 +40,10 @@ switch ($array_config['theme']) {
 		echo '<link rel="stylesheet" type="text/css" href="assets/css/simplex.min.css">';
 		break;
 	
+	case '5':
+		echo '<link rel="stylesheet" type="text/css" href="assets/css/superhero.min.css">';
+		break;
+	
 	default:
 		echo '<link rel="stylesheet" type="text/css" href="assets/css/style1.css">';
 		break;

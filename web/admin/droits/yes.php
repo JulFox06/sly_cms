@@ -1,7 +1,7 @@
 <?php
 include '../../../contents/sly_config.php';
-list($login, $accept) = explode('_', $_POST['id']);
-$req = "UPDATE sly_user SET groupe='Modérateur' WHERE login = '$login'";
+list($login, $accept, $rang) = explode('_', $_POST['id']);
+$req = "UPDATE sly_user SET groupe='$rang' WHERE login = '$login'";
 $res = mysqli_query($lien, $req);
 if (!$res) {
 	echo "Erreur SQL : $req <br>".mysqli_error($lien);

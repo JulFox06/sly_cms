@@ -121,7 +121,12 @@ $array_config = mysqli_fetch_array($res);
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="theme" id="theme3" value="4" <?php coche('4',$array_config['theme']); ?>>Thème 4 (simplex)
+								<input type="radio" name="theme" id="theme4" value="4" <?php coche('4',$array_config['theme']); ?>>Thème 4 (simplex)
+							</label>
+						</div>
+						<div class="radio">
+							<label>
+								<input type="radio" name="theme" id="theme5" value="5" <?php coche('5',$array_config['theme']); ?>>Thème 5 (superhero)
 							</label>
 						</div>
 					</div>
